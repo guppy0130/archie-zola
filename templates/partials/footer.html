@@ -1,10 +1,12 @@
 <footer>
   <div style="display:flex">
+    {% if config.extra.social %}
     {% for social in config.extra.social %}
         <a class="soc" href={{ social.url }} title={{ social.name }}>
             <i data-feather={{ social.icon }}></i>
         </a>
     {% endfor %}
+    {% endif %}
   </div>
   <div class="footer-info">
     {{ now() | date(format="%Y") }} © {{ config.extra.copyright }} | <a
