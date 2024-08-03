@@ -1,0 +1,85 @@
+@use "sass:map";
+
+// TODO: figure out how to normalize these
+$language_args: (
+  'js': ('js', #f7df1e),
+  'javascript': ('js', #f7df1e),
+
+  'ts': ('ts', dodgerblue),
+  'typescript': ('ts', dodgerblue),
+
+  'sh': ('shell', green),
+  'bash': ('shell', green),
+  'shell': ('shell', green),
+
+  'yaml': ('yaml', dodgerblue),
+  'yml': ('yaml', dodgerblue),
+  'json': ('json', dodgerblue),
+  'toml': ('toml', blue),
+
+  'py': ('py', blue),
+  'python': ('py', blue),
+
+  'go': ('go', aqua),
+  'rust': ('rs', rgb(247,80,0)),
+  'rs': ('rs', rgb(247,80,0)),
+  'cpp': ('cpp', #5e97d0),
+  'c++': ('cpp', #5e97d0),
+
+  'css': ('css', royalblue),
+  'md': ('md', royalblue),
+);
+
+// pick white or black based on contrast of $n
+@mixin text-contrast($n) {
+  $color-brightness: round(
+    (red($n) * 299)+ (green($n) * 587)+ (blue($n) * 114)/1000
+  );
+  $light-color: round(
+    (red(#ffffff) * 299)+ (green(#ffffff) * 587)+ (blue(#ffffff) * 114)/1000
+  );
+  @if abs($color-brightness) < ($light-color/2) {
+    color: white;
+  } @else {
+    color: black;
+  }
+}
+
+// generate a language block for nesting
+@mixin pre_code_language_block($language, $content, $background) {
+  &[class='language-#{$language}'] {
+    &::before {
+      content: $content;
+      background: $background;
+      @include text-contrast($background);
+    }
+  }
+}
+
+pre {
+  code {
+    &[class*='language-'] {
+      -webkit-overflow-scrolling: touch;
+
+      &::before {
+        background: black;
+        border-radius: 0 0 0.25rem 0.25rem;
+        color: white;
+        font-size: 12px;
+        letter-spacing: 0.025rem;
+        padding: 0.1rem 0.5rem;
+        position: absolute;
+        right: 1rem;
+        text-align: right;
+        text-transform: uppercase;
+        top: 0;
+      }
+    }
+
+    // generates a shitton of [class='language-*'] attribute selectors based on
+    // the map above
+    @each $language, $args in $language_args {
+      @include pre_code_language_block($language, $args...)
+    }
+  }
+}
