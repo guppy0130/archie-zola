@@ -25,9 +25,7 @@
     {% endif %}
 
     {% if current_path == "/" %}
-        <title>
-            {{ config.title | default(value="Home") }}
-        </title>
+        <title>{{ config.title | default(value="Home") }}</title>
         {% if not page_has_og_title %}
             <meta property="og:title" content="{{ config.title | default(value="Home") }}" />
         {% endif %}
