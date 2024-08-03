@@ -16,7 +16,7 @@ body {
 }
 
 hr {
-    border-top: 3px dotted blue;
+    border-top: 3px dotted var(--darkMaincolor);
 }
 
 code {
@@ -34,7 +34,7 @@ pre {
 }
 
 blockquote {
-    border-color: blue;
+    border-color: var(--darkMaincolor);
 }
 
 h1,
@@ -109,8 +109,8 @@ a:hover {
 }
 
 .header nav,
-.footer {
-    border-color: #333;
+footer {
+    border-color: var(--darkMaincolor);
 }
 
 .highlight {
