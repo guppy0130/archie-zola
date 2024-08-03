@@ -79,31 +79,27 @@
     {% if config.extra.social and config.extra.useCDN | default(value=false) %}
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     {% elif config.extra.social or config.extra.mode == "toggle" %}
-        <script src={{ get_url(path="js/feather.min.js") }}></script>
+        <script src="/js/feather.min.js"></script>
     {% endif %}
 
 
-    {% if config.extra.useCDN | default(value=false) %}
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-    {% else %}
-        <link href={{ get_url(path="css/fonts.css") }} rel="stylesheet" />
-    {% endif %}
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" media="screen" href={{ get_url(path="css/main.css") }} />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css"/>
 
     {% if config.extra.mode == "auto" or config.extra.mode == "dark" or config.extra.mode == "toggle" %}
         <link
             rel="stylesheet"
             id="darkModeStyle"
             type="text/css"
-            href={{ get_url(path="css/dark.css") }}
+            href="/css/dark.css"
             {% if config.extra.mode == "auto" %}
-                media="(prefers-color-scheme: dark)"
+            media="(prefers-color-scheme: dark)"
             {% endif %}
             {% if config.extra.mode == "toggle" %}
-                disabled
+            disabled
             {% endif %}
         />
     {% endif %}
