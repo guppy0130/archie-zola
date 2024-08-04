@@ -2,9 +2,9 @@
   <div style="display:flex">
     {% if config.extra.social %}
     {% for social in config.extra.social %}
-        <a class="soc" href={{ social.url }} title={{ social.name }}>
-            <i data-feather={{ social.icon }}></i>
-        </a>
+    <a class="soc" href={{ social.url }} title={{ social.name }}>
+      <i data-feather={{ social.icon }}></i>
+    </a>
     {% endfor %}
     {% endif %}
   </div>
@@ -13,8 +13,13 @@
   </div>
 </footer>
 
-{% if config.extra.social %}
+{% if config.extra.social or config.extra.mode == 'toggle' %}
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <script>
-    feather.replace();
+  feather.replace();
 </script>
+{% endif %}
+
+{% if config.extra.mode == 'toggle' %}
+<script src="/js/themetoggle.js"></script>
 {% endif %}

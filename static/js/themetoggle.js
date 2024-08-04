@@ -2,9 +2,11 @@ function setTheme(mode) {
   localStorage.setItem('theme-storage', mode);
   document.documentElement.style.setProperty('color-scheme', mode);
   if (mode === 'dark') {
-    document.getElementById("dark-mode-toggle").innerHTML = "<i data-feather=\"sun\"></i>";
+    document.getElementById('dark-mode-toggle').innerHTML =
+      '<i data-feather="sun"></i>';
   } else if (mode === 'light') {
-    document.getElementById("dark-mode-toggle").innerHTML = "<i data-feather=\"moon\"></i>";
+    document.getElementById('dark-mode-toggle').innerHTML =
+      '<i data-feather="moon"></i>';
   }
   feather.replace();
 }
@@ -20,14 +22,14 @@ function toggleTheme() {
 var savedTheme = localStorage.getItem('theme-storage');
 if (savedTheme) {
   setTheme(savedTheme);
+} else {
+  setTheme(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
 }
 
 window
   .matchMedia('(prefers-color-scheme: dark)')
   .addEventListener('change', (event) => {
-    if (event.matches) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    setTheme(event.matches ? 'dark' : 'light');
   });
