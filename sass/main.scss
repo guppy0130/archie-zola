@@ -2,11 +2,14 @@
 
 :root {
   --dark: #232323;
+  --darker: #111;
   --accentColor: light-dark(red, #50fa7b);
   --backgroundColor: light-dark(white, var(--dark));
-  --modifiedBackgroundColor: light-dark(#f1f1f1, #111);
+  // for backgrounds that need separation from the root's background
+  --modifiedBackgroundColor: light-dark(#f1f1f1, var(--darker));
   --textColor: light-dark(var(--dark), #ddd);
-  --calloutColor: dodgerblue;
+  // for text that's less important
+  --modifiedTextColor: light-dark(var(--darker), #bbb);
   --hovercolor: navy;
   color-scheme: light dark;
 }
@@ -182,7 +185,7 @@ header {
 }
 
 .meta {
-  color: #999;
+  color: var(--modifiedTextColor);
   letter-spacing: -0.5px;
 }
 
@@ -217,33 +220,9 @@ footer {
   margin-bottom: 0;
 }
 
-time {
-  color: grey;
-}
-
 /* Posts */
 article .title {
   margin-bottom: 1em;
-}
-
-/* Callout */
-.callout {
-  background-color: var(--calloutColor);
-  color: #fff;
-  padding: 1em;
-
-  p {
-    margin: 0;
-  }
-
-  a {
-    border-bottom: 3px solid #fff;
-
-    &:hover {
-      background-color: #fff;
-      color: var(--calloutColor);
-    }
-  }
 }
 
 .site-description {

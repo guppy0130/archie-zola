@@ -27,17 +27,16 @@
             <a href={{ page.permalink }}>{{page.title}}</a>
         </h1>
 
-        <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
-        <span>| {{ page.reading_time }} {{ config.extra.translations[lang][0].read_time }}</span>
-        {% if page.extra.author %}
-        <span>| {{extra.translations[lang][0].posted_by }} <a href="{{ page.extra.author.social }}" target="_blank">{{
-                page.extra.author.name }}</a></span>
-        {% endif %}
-
-        <br />
+        <p class="meta">
+            <time datetime="{{ page.date | date(format="%Y-%m-%d") }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+            | {{ page.reading_time }} {{ config.extra.translations[lang][0].read_time }}
+            {% if page.extra.author %}
+            | {{extra.translations[lang][0].posted_by }} <a href="{{ page.extra.author.social }}" target="_blank">{{ page.extra.author.name }}</a>
+            {% endif %}
+        </p>
         <div class="description">
             {% if page.description %}
-            {{ page.description }}
+            {{ page.description | trim_end | safe }}
             {% elif page.summary %}
             {{ page.summary | trim_end | safe }}
             {% else %}
@@ -46,7 +45,7 @@
         </div>
 
         {% if read_more | default(value=true) %}
-        <a class="readmore" href={{ page.permalink }}>{{ extra.translations[lang][0].show_more }}</a>
+        <a class="readmore" href="{{ page.permalink }}#continue-reading">{{ extra.translations[lang][0].show_more }}</a>
         {% endif %}
     </section>
 
@@ -80,10 +79,9 @@
             <h1 class="title">{{ page.title }}</h1>
             <div class="meta">
                 {% if page.extra.author %}
-                {{extra.translations[lang][0].posted_by }} <a href="{{ page.extra.author.social }}" target="_blank">{{
-                    page.extra.author.name }}</a>
+                {{extra.translations[lang][0].posted_by }} <a href="{{ page.extra.author.social }}" target="_blank">{{ page.extra.author.name }}</a>
                 {% endif %}
-                {{ extra.translations[lang][0].posted_on }} {{ page.date | date(format="%Y-%m-%d") }}
+                {{ extra.translations[lang][0].posted_on }} <time datetime="{{ page.date | date(format="%Y-%m-%d") }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
 
                 {% if page.draft %}
                 <span class="draft-label">DRAFT</span>
